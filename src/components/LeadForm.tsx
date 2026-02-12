@@ -29,7 +29,7 @@ export function LeadForm() {
         setStatus("loading");
 
         try {
-            const response = await fetch(siteConfig.webhooks.leadForm, {
+            const response = await fetch(siteConfig.webhooks.leadForm || siteConfig.webhooks.lead, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ ...formData, source: "landing_page", timestamp: new Date().toISOString() }),
