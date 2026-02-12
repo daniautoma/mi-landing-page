@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Logo } from "@/components/Logo";
+
 
 export function Hero() {
     return (
@@ -10,9 +10,7 @@ export function Hero() {
             <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-blue-500/20 blur-[120px] pointer-events-none" />
 
             <div className="container px-4 mx-auto text-center relative z-10">
-                <div className="flex justify-center mb-8">
-                    <Logo variant="iso" width={80} height={80} className="w-20 h-20" />
-                </div>
+
 
                 <div className="inline-block mb-6 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-xs md:text-sm text-secondary font-medium tracking-wide">
                     🚀 Potencia tu negocio con Inteligencia Artificial

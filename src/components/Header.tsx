@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Logo } from "@/components/Logo";
+
 import { siteConfig } from "@/config/site";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -29,11 +29,7 @@ export function Header() {
         >
             <div className="container mx-auto px-4 flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 group">
-                    <Logo
-                        variant="full"
-                        height={40}
-                        className="h-8 md:h-10 w-auto"
-                    />
+                    <span className="font-bold text-xl tracking-tight">danIAutoma</span>
                 </Link>
 
                 {/* Desktop Nav */}

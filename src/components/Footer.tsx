@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { Logo } from "@/components/Logo";
+
 import { Instagram, Facebook, MonitorPlay as TikTok } from "lucide-react";
 
 export function Footer() {
@@ -10,7 +10,7 @@ export function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div className="col-span-1 md:col-span-2">
                         <Link href="/" className="mb-4 block">
-                            <Logo variant="full" width={150} />
+                            <span className="font-bold text-xl">danIAutoma</span>
                         </Link>
                         <p className="text-muted-foreground max-w-sm">
                             Potenciando empresas mediante la automatización inteligente de atención al cliente y agendamiento con IA.
@@ -21,7 +21,6 @@ export function Footer() {
                         <h3 className="font-semibold text-white mb-4">Enlaces</h3>
                         <ul className="space-y-2 text-sm text-muted-foreground">
                             <li><Link href="#servicios" className="hover:text-primary transition-colors">Servicios</Link></li>
-                            <li><Link href="#como-funciona" className="hover:text-primary transition-colors">Cómo funciona</Link></li>
                             <li><Link href="#beneficios" className="hover:text-primary transition-colors">Beneficios</Link></li>
                             <li><Link href="#contacto" className="hover:text-primary transition-colors">Contacto</Link></li>
                         </ul>
