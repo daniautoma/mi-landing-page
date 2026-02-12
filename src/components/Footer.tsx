@@ -1,47 +1,47 @@
 import Link from "next/link";
-import { siteConfig } from "@/config/site";
+import { Instagram, Facebook, TikTok } from "lucide-react"; // Note: TikTok icon might not be in all Lucide versions, using placeholder
+import Logo from "./Logo";
 
-export function Footer() {
-    return (
-        <footer className="border-t border-white/10 bg-black/40 backdrop-blur-xl mt-20">
-            <div className="container mx-auto px-4 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div className="col-span-1 md:col-span-2">
-                        <Link href="/" className="text-2xl font-bold tracking-tight mb-4 block">
-                            dan<span className="text-secondary">IA</span>utoma
-                        </Link>
-                        <p className="text-muted-foreground max-w-sm">
-                            Potenciando empresas mediante la automatización inteligente de procesos con n8n y tecnologías modernas.
-                        </p>
-                    </div>
+export default function Footer() {
+  return (
+    <footer className="py-12 bg-[#080d2f] border-t border-white/5">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+          <div className="flex flex-col items-center md:items-start gap-4">
+            <Logo variant="full" height={32} className="h-8" />
+            <p className="text-gray-500 text-center md:text-left">
+              Transformando negocios con IA de vanguardia.
+            </p>
+          </div>
 
-                    <div>
-                        <h3 className="font-semibold text-white mb-4">Enlaces</h3>
-                        <ul className="space-y-2 text-sm text-muted-foreground">
-                            <li><Link href="#servicios" className="hover:text-primary transition-colors">Servicios</Link></li>
-                            <li><Link href="#beneficios" className="hover:text-primary transition-colors">Beneficios</Link></li>
-                            <li><Link href="#contacto" className="hover:text-primary transition-colors">Contacto</Link></li>
-                        </ul>
-                    </div>
+          <div className="flex items-center gap-6">
+            <Link href="https://instagram.com" className="text-gray-400 hover:text-purple-400 transition-colors">
+              <Instagram className="w-6 h-6" />
+            </Link>
+            <Link href="https://facebook.com" className="text-gray-400 hover:text-purple-400 transition-colors">
+              <Facebook className="w-6 h-6" />
+            </Link>
+            {/* TikTok Icon placeholder using Facebook as base or custom div if Lucide doesn't have it */}
+            <Link href="https://tiktok.com" className="text-gray-400 hover:text-purple-400 transition-colors">
+              <svg 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className="w-6 h-6"
+              >
+                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+              </svg>
+            </Link>
+          </div>
+        </div>
 
-                    <div>
-                        <h3 className="font-semibold text-white mb-4">Legal</h3>
-                        <ul className="space-y-2 text-sm text-muted-foreground">
-                            <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacidad</Link></li>
-                            <li><Link href="/terms" className="hover:text-primary transition-colors">Términos</Link></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div className="border-t border-white/5 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
-                    <p>&copy; {new Date().getFullYear()} {siteConfig.name}. Todos los derechos reservados.</p>
-                    <div className="flex gap-4">
-                        {/* Social placeholders */}
-                        <a href={siteConfig.links.twitter} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Twitter/X</a>
-                        <a href={siteConfig.links.linkedin} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    );
+        <div className="pt-8 border-t border-white/5 text-center text-gray-500 text-sm">
+          <p>© {new Date().getFullYear()} danIAutoma. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  );
 }

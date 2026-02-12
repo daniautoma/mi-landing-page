@@ -1,41 +1,37 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import Logo from "./Logo";
 
-export function Hero() {
-    return (
-        <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center justify-center min-h-[90vh]">
-            {/* Background Effects */}
-            <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-purple-500/20 blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-blue-500/20 blur-[120px] pointer-events-none" />
-
-            <div className="container px-4 mx-auto text-center relative z-10">
-                <div className="inline-block mb-6 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-xs md:text-sm text-secondary font-medium tracking-wide">
-                    🚀 Potencia tu negocio con Inteligencia Artificial
-                </div>
-
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 glow-text">
-                    Automatiza con <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-white">
-                        dan<span className="text-secondary">IA</span>utoma
-                    </span>
-                </h1>
-
-                <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed text-balance">
-                    Automatizamos tareas repetitivas, integraciones y procesos empresariales para
-                    <span className="text-white font-medium"> ahorrar tiempo</span>,
-                    <span className="text-white font-medium"> reducir errores</span> y
-                    <span className="text-white font-medium"> aumentar la productividad</span> mediante n8n.
-                </p>
-
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <Button variant="glow" size="lg" className="h-12 px-8 text-base shadow-lg shadow-purple-500/25" asChild>
-                        <Link href="#contacto">Automatizar mi negocio</Link>
-                    </Button>
-                    <Button variant="outline" size="lg" className="h-12 px-8 text-base hover:bg-white/5" asChild>
-                        <Link href="#como-funciona">Ver cómo funciona</Link>
-                    </Button>
-                </div>
-            </div>
-        </section>
-    );
+export default function Hero() {
+  return (
+    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+      {/* Background gradients */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent blur-3xl" />
+      
+      <div className="container mx-auto px-4 relative z-10 text-center">
+        <Logo variant="isotype" width={80} height={80} className="mx-auto mb-8 animate-fade-in" />
+        <h1 className="text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 mb-6 leading-tight">
+          Automatización de atención al cliente y agendamiento con IA
+        </h1>
+        <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+          Escalamos tu negocio implementando asistentes inteligentes que atienden a tus clientes 24/7.
+        </p>
+        
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+          <Link 
+            href="#contacto"
+            className="w-full md:w-auto px-8 py-4 bg-white text-[#080d2f] rounded-full font-bold text-lg hover:bg-white/90 transition-all flex items-center justify-center gap-2"
+          >
+            Agenda una Demo <ArrowRight className="w-5 h-5" />
+          </Link>
+          <Link 
+            href="#servicios"
+            className="w-full md:w-auto px-8 py-4 bg-white/5 border border-white/10 text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all"
+          >
+            Ver Servicios
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
 }
