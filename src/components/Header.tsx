@@ -1,47 +1,52 @@
-import { cn } from "@/lib/utils";
+"use client";
+
 import Link from "next/link";
-import Logo from "./Logo";
+import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/Logo";
+import { siteConfig } from "@/config/site";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
-const navigation = [
-  { name: "Servicios", href: "#servicios" },
-  { name: "Proceso", href: "#proceso" },
-  { name: "Contacto", href: "#contacto" },
-];
+export function Header() {
+    const [isScrolled, setIsScrolled] = useState(false);
 
-export default function Header() {
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#080d2f]/80 backdrop-blur-md border-b border-white/5">
-      <nav className="container mx-auto px-4 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <Logo variant="full" height={40} className="md:h-10 h-8" />
-        </Link>
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 10);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              {item.name}
-            </Link>
-          ))}
-          <Link
-            href="#contacto"
-            className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-medium transition-all"
-          >
-            Empezar
-          </Link>
-        </div>
+    return (
+        <header
+            className={cn(
+                "fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent",
+                isScrolled
+                    ? "bg-background/80 backdrop-blur-md border-white/10 py-3"
+                    : "bg-transparent py-5"
+            )}
+        >
+            <div className="container mx-auto px-4 flex items-center justify-between">
+                <Link href="/" className="flex items-center gap-2 group">
+                    <Logo
+                        variant="full"
+                        height={40}
+                        className="h-8 md:h-10 w-auto"
+                    />
+                </Link>
 
-        {/* Mobile Toggle Placeholder */}
-        <button className="md:hidden text-white p-2">
-          <div className="w-6 h-0.5 bg-white mb-1.5"></div>
-          <div className="w-6 h-0.5 bg-white mb-1.5"></div>
-          <div className="w-6 h-0.5 bg-white"></div>
-        </button>
-      </nav>
-    </header>
-  );
+                {/* Desktop Nav */}
+                <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
+                    <Link href="#servicios" className="hover:text-white transition-colors">Servicios</Link>
+                    <Link href="#como-funciona" className="hover:text-white transition-colors">Cómo funciona</Link>
+                    <Link href="#beneficios" className="hover:text-white transition-colors">Beneficios</Link>
+                </nav>
+
+                <Button variant="glow" size="sm" asChild>
+                    <Link href="#contacto">Solicitar automatización</Link>
+                </Button>
+            </div>
+        </header>
+    );
 }

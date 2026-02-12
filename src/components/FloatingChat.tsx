@@ -1,133 +1,138 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { MessageCircle, X, Send } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-}
-
-export default function FloatingChat() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "¡Hola! Soy el asistente de danIAutoma. ¿Cómo puedo ayudarte hoy?" }
-  ]);
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+// GA Event Helper
+const trackChatClick = () => {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "chat_click", {
+            event_category: "Chat",
+            event_label: "Open Chat Widget",
+        });
     }
-  }, [messages]);
+};
 
-  useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isOpen]);
+export function FloatingChat() {
+    const [isOpen, setIsOpen] = useState(false);
+    const [messages, setMessages] = useState<{ role: 'user' | 'bot', content: string }[]>([
+        { role: 'bot', content: '¡Hola! Soy el asistente virtual de danIAutoma. ¿En qué puedo ayudarte hoy?' }
+    ]);
+    const [inputValue, setInputValue] = useState("");
+    const [isTyping, setIsTyping] = useState(false);
 
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    const userMsg = input.trim();
-    setInput("");
-    setMessages((prev) => [...prev, { role: "user", content: userMsg }]);
-    setIsLoading(true);
+    // Auto-scroll to bottom
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
-    try {
-      const response = await fetch(siteConfig.webhooks.chat, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMsg }),
-      });
+    useEffect(() => {
+        if (isOpen) {
+            scrollToBottom();
+            inputRef.current?.focus();
+        }
+    }, [messages, isOpen]);
 
-      if (!response.ok) throw new Error("Error en la respuesta");
-      const data = await response.json();
-      
-      setMessages((prev) => [...prev, { role: "assistant", content: data.output || "Lo siento, hubo un error." }]);
-    } catch (error) {
-      setMessages((prev) => [...prev, { role: "assistant", content: "Lo siento, no puedo responder en este momento." }]);
-    } finally {
-      setIsLoading(false);
-      if (inputRef.current) inputRef.current.focus();
-    }
-  };
+    const toggleChat = () => {
+        if (!isOpen) trackChatClick();
+        setIsOpen(!isOpen);
+    };
 
-  return (
-    <div className="fixed bottom-6 right-6 z-[60]">
-      {isOpen ? (
-        <div className="bg-[#0a0e33] border border-white/10 w-[350px] md:w-[400px] h-[500px] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5">
-          {/* Header */}
-          <div className="p-4 bg-purple-600 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                <MessageCircle className="w-4 h-4 text-white" />
-              </div>
-              <span className="font-bold text-white">Chat Asistente</span>
-            </div>
-            <button onClick={() => setIsOpen(false)} className="text-white/80 hover:text-white">
-              <X className="w-6 h-6" />
-            </button>
-          </div>
+    const handleSend = async () => {
+        if (!inputValue.trim()) return;
 
-          {/* Messages */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.map((msg, idx) => (
-              <div
-                key={idx}
+        const userMsg = inputValue;
+        setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
+        setInputValue("");
+        setIsTyping(true);
+
+        // Keep focus on input
+        setTimeout(() => inputRef.current?.focus(), 10);
+
+        try {
+            const response = await fetch(siteConfig.webhooks.chat, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMsg, sessionId: "session_" + Math.random().toString(36).substr(2, 9) })
+            });
+
+            const data = await response.json();
+
+            let botResponse = "";
+            if (Array.isArray(data) && data.length > 0) {
+                botResponse = data[0].output || data[0].message || "No recibí una respuesta clara.";
+            } else {
+                botResponse = data.output || data.message || "No recibí una respuesta clara.";
+            }
+
+            setIsTyping(false);
+            setMessages(prev => [...prev, { role: 'bot', content: botResponse }]);
+
+        } catch (e) {
+            setIsTyping(false);
+            setMessages(prev => [...prev, { role: 'bot', content: "Lo siento, hubo un error de conexión." }]);
+        }
+    };
+
+    return (
+        <div className="fixed bottom-24 right-6 z-50 flex flex-col items-end">
+
+            {/* Chat Window */}
+            <div
                 className={cn(
-                  "max-w-[80%] p-3 rounded-2xl",
-                  msg.role === "user"
-                    ? "bg-purple-600 text-white ml-auto rounded-tr-none"
-                    : "bg-white/5 text-gray-200 rounded-tl-none"
+                    "bg-slate-900 border border-white/10 rounded-2xl shadow-2xl w-[350px] mb-4 overflow-hidden transition-all duration-300 origin-bottom-right",
+                    isOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-10 pointer-events-none h-0"
                 )}
-              >
-                {msg.content}
-              </div>
-            ))}
-            {isLoading && (
-              <div className="bg-white/5 text-gray-200 p-3 rounded-2xl rounded-tl-none max-w-[80%] flex items-center gap-2">
-                <Loader2 className="w-4 h-4 animate-spin" /> Escribiendo...
-              </div>
-            )}
-          </div>
+            >
+                <div className="bg-primary/10 p-4 border-b border-white/5 flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                        <span className="font-semibold text-sm text-white">Soporte danIAutoma</span>
+                    </div>
+                    <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white">
+                        <X className="w-4 h-4" />
+                    </button>
+                </div>
 
-          {/* Input */}
-          <div className="p-4 border-t border-white/5 bg-white/5">
-            <div className="flex gap-2">
-              <input
-                ref={inputRef}
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && handleSend()}
-                placeholder="Escribe tu mensaje..."
-                className="flex-1 bg-white/10 border-none rounded-full px-4 text-white focus:ring-1 focus:ring-purple-500"
-              />
-              <button
-                onClick={handleSend}
-                disabled={isLoading}
-                className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center hover:bg-purple-700 disabled:opacity-50"
-              >
-                <Send className="w-4 h-4 text-white" />
-              </button>
+                <div className="h-[300px] overflow-y-auto p-4 space-y-3 bg-black/40">
+                    {messages.map((msg, idx) => (
+                        <div key={idx} className={cn("max-w-[80%] rounded-lg p-3 text-sm", msg.role === 'user' ? "ml-auto bg-primary text-white" : "bg-white/10 text-gray-200")}>
+                            {msg.content}
+                        </div>
+                    ))}
+                    {isTyping && <div className="text-xs text-gray-500 animate-pulse">Escribiendo...</div>}
+                    <div ref={messagesEndRef} />
+                </div>
+
+                <div className="p-3 border-t border-white/5 bg-slate-900 flex gap-2">
+                    <input
+                        ref={inputRef}
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                        placeholder="Escribe un mensaje..."
+                        className="flex-1 bg-black/20 text-sm rounded-md px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    />
+                    <Button size="icon" variant="ghost" onClick={handleSend} className="h-9 w-9">
+                        <Send className="w-4 h-4" />
+                    </Button>
+                </div>
             </div>
-          </div>
+
+            {/* Floating Toggle Button */}
+            <Button
+                onClick={toggleChat}
+                variant="glow"
+                className="h-14 w-14 rounded-full shadow-lg shadow-primary/20 p-0 flex items-center justify-center group"
+            >
+                {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6 group-hover:scale-110 transition-transform" />}
+            </Button>
         </div>
-      ) : (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="w-16 h-16 rounded-full bg-purple-600 text-white shadow-xl shadow-purple-900/40 hover:scale-110 active:scale-95 transition-all flex items-center justify-center group"
-        >
-          <MessageCircle className="w-8 h-8 group-hover:rotate-12 transition-transform" />
-        </button>
-      )}
-    </div>
-  );
+    );
 }

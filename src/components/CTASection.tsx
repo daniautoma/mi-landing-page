@@ -1,31 +1,37 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sparkles } from "lucide-react";
 
-export default function CTASection() {
-  return (
-    <section className="py-20 bg-[#080d2f]">
-      <div className="container mx-auto px-4">
-        <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-r from-purple-900 to-indigo-900 p-12 md:p-24 text-center">
-          {/* Decorative elements */}
-          <div className="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full translate-x-1/3 translate-y-1/3 blur-3xl" />
-          
-          <div className="relative z-10 max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
-              Deja de perder clientes por falta de respuesta
-            </h2>
-            <p className="text-xl md:text-2xl text-purple-100/70 mb-12">
-              Únete a las empresas que ya escalan su operación con inteligencia artificial.
-            </p>
-            <Link 
-              href="#contacto"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-white text-purple-900 rounded-full font-bold text-xl hover:bg-purple-50 hover:scale-105 transition-all shadow-xl shadow-black/20"
-            >
-              Empezar Ahora <ArrowRight className="w-6 h-6" />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+export function CTASection() {
+    return (
+        <section className="py-24 relative overflow-hidden">
+            {/* Background Decorative Elements */}
+            <div className="absolute inset-0 bg-primary/5 -z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 blur-[120px] rounded-full -z-10" />
+
+            <div className="container mx-auto px-4 text-center">
+                <div className="max-w-3xl mx-auto p-12 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-md relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-8 opacity-20">
+                        <Sparkles className="w-24 h-24 text-primary" />
+                    </div>
+
+                    <h2 className="text-3xl md:text-5xl font-bold mb-6 relative z-10">
+                        ¿Listo para escalar tu atención al cliente?
+                    </h2>
+                    <p className="text-xl text-muted-foreground mb-10 relative z-10">
+                        Deja de perder clientes por falta de respuesta. Automatiza hoy mismo y enfócate en lo que realmente importa: hacer crecer tu negocio.
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
+                        <Button size="lg" className="h-14 px-10 text-lg rounded-full" asChild>
+                            <Link href="#contacto">Solicitar Demo Gratis</Link>
+                        </Button>
+                        <Button size="lg" variant="outline" className="h-14 px-10 text-lg rounded-full border-white/10 bg-white/5 hover:bg-white/10" asChild>
+                            <Link href="#servicios">Ver Servicios</Link>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 }
