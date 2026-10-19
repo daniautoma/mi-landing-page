@@ -1,16 +1,26 @@
+import { agenciaData, getWhatsAppLink } from "@/data/agencia";
+
 export const siteConfig = {
-    name: "danIAutoma",
-    title: "danIAutoma | Automatización de Procesos con n8n",
-    description: "Automatizamos tareas repetitivas, integraciones y procesos empresariales para ahorrar tiempo, reducir errores y aumentar la productividad mediante n8n.",
-    author: "Daniel - Expert Automation",
+    name: agenciaData.nombre,
+    title: `${agenciaData.nombre} | Agencia de Automatización con IA & Agentes de WhatsApp`,
+    description: agenciaData.descripcionCorta,
+    propuestaValor: agenciaData.propuestaValor,
+    author: "daniautoma",
+    domain: agenciaData.dominio,
+    whatsappNumber: agenciaData.whatsapp.displayNumber,
+    whatsappRaw: agenciaData.whatsapp.rawNumber,
+    whatsappLink: getWhatsAppLink(),
     links: {
-        twitter: "https://twitter.com/daniautoma",
-        linkedin: "https://linkedin.com/in/daniautoma",
-        email: "contacto@daniautoma.com",
+        crm: agenciaData.urls.crm,
+        demoDental: agenciaData.urls.demoDental,
+        instagram: agenciaData.social.instagram,
+        tiktok: agenciaData.social.tiktok,
+        linkedin: agenciaData.social.linkedin,
+        email: agenciaData.social.email,
     },
     webhooks: {
-        leadForm: process.env.NEXT_PUBLIC_WEBHOOK_LEAD || "https://daniautoma.cloud/webhook/landing-leads",
-        chat: process.env.NEXT_PUBLIC_WEBHOOK_CHAT || "https://daniautoma.cloud/webhook/ai-chat",
+        leadForm: agenciaData.webhooks.n8nLeadWebhook,
+        chat: agenciaData.webhooks.n8nChatWebhook,
     },
     analytics: {
         gaId: process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX",

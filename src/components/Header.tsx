@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
-import { siteConfig } from "@/config/site";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { agenciaData, getWhatsAppLink } from "@/data/agencia";
+import { MessageSquare } from "lucide-react";
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const whatsappUrl = getWhatsAppLink(agenciaData.whatsapp.mensajePredeterminado);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,25 +24,55 @@ export function Header() {
             className={cn(
                 "fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent",
                 isScrolled
-                    ? "bg-background/80 backdrop-blur-md border-white/10 py-3"
+                    ? "bg-background/85 backdrop-blur-md border-white/10 py-3 shadow-lg"
                     : "bg-transparent py-5"
             )}
         >
             <div className="container mx-auto px-4 flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 group">
-                    <span className="font-bold text-xl tracking-tight">danIAutoma</span>
+                    <span className="font-extrabold text-xl tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+                        {agenciaData.nombre}
+                    </span>
+                    <span className="hidden sm:inline-block text-[10px] tracking-wider uppercase font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        IA & Auto
+                    </span>
                 </Link>
 
-                {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
+                {/* Navegación Desktop */}
+                <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-muted-foreground">
+                    <Link href="#demos" className="text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1.5 font-semibold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        Demos en Vivo
+                    </Link>
                     <Link href="#servicios" className="hover:text-white transition-colors">Servicios</Link>
                     <Link href="#como-funciona" className="hover:text-white transition-colors">Cómo funciona</Link>
                     <Link href="#beneficios" className="hover:text-white transition-colors">Beneficios</Link>
+                    <Link href="#contacto" className="hover:text-white transition-colors">Diagnóstico</Link>
                 </nav>
 
-                <Button variant="glow" size="sm" asChild>
-                    <Link href="#contacto">Solicitar automatización</Link>
-                </Button>
+                {/* CTAs Header */}
+                <div className="flex items-center gap-3">
+                    <Button
+                        variant="ghost"
+                        size="sm"
+                        className="hidden sm:flex text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 border border-emerald-500/20"
+                        asChild
+                    >
+                        <a
+                            href={whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5"
+                        >
+                            <MessageSquare className="w-4 h-4" />
+                            WhatsApp
+                        </a>
+                    </Button>
+
+                    <Button variant="glow" size="sm" asChild>
+                        <Link href="#contacto">Solicitar Diagnóstico</Link>
+                    </Button>
+                </div>
             </div>
         </header>
     );
