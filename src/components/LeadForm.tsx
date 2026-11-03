@@ -43,14 +43,40 @@ export function LeadForm() {
                 submittedAt: new Date().toISOString(),
             };
 
-            const response = await fetch(webhookUrl, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                },
-                body: JSON.stringify(payload),
-            });
+            // Intentar primero mediante la ruta proxy interna /api/lead (inmune a adblockers)
+            let response: Response;
+            try {
+                response = await fetch("/api/lead", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
+                    body: JSON.stringify(payload),
+                });
+            } catch (proxyError) {
+                // Si la ruta interna falla por red, fallback directo al webhook de n8n
+                response = await fetch(webhookUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
+                    body: JSON.stringify(payload),
+                });
+            }
+
+            // Si el proxy devolvió error de servidor, intentar directo a n8n
+            if (!response.ok && webhookUrl) {
+                response = await fetch(webhookUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
+                    body: JSON.stringify(payload),
+                });
+            }
 
             if (response.ok) {
                 trackLead("webhook_n8n");

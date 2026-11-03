@@ -70,8 +70,8 @@ export const agenciaData = {
 
     // Integraciones y webhooks
     webhooks: {
-        n8nLeadWebhook: process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || "https://daniautoma.cloud/webhook/landing-leads",
-        n8nChatWebhook: process.env.NEXT_PUBLIC_WEBHOOK_CHAT || "https://daniautoma.cloud/webhook/ai-chat",
+        n8nLeadWebhook: process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || "https://n8n.daniautoma.cloud/webhook/landing-leads",
+        n8nChatWebhook: process.env.NEXT_PUBLIC_WEBHOOK_CHAT || "https://n8n.daniautoma.cloud/webhook/ai-chat",
     },
 
     // Catálogo y servicios
