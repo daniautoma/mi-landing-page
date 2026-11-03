@@ -20,7 +20,7 @@ export function LeadForm() {
         fullName: "",
         email: "",
         phone: "",
-        businessType: "",
+        businessName: "",
         serviceInterest: agenciaData.servicios[0],
         message: "",
     });
@@ -59,7 +59,7 @@ export function LeadForm() {
                     fullName: "",
                     email: "",
                     phone: "",
-                    businessType: "",
+                    businessName: "",
                     serviceInterest: agenciaData.servicios[0],
                     message: "",
                 });
@@ -69,7 +69,7 @@ export function LeadForm() {
         } catch (error: any) {
             console.error("Error al enviar formulario a n8n:", error);
             setStatus("error");
-            setErrorMessage("No pudimos enviar tu mensaje directamente al sistema automático. Puedes enviarlo por WhatsApp con un solo clic.");
+            setErrorMessage("No pudimos enviar tu solicitud al sistema automático. Puedes contactarnos por WhatsApp directamente.");
         }
     };
 
@@ -79,16 +79,16 @@ export function LeadForm() {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    // Construye un mensaje estructurado para WhatsApp con los datos que el usuario ya digitó
+    // Construye un mensaje estructurado para WhatsApp con los datos digitados por el usuario
     const buildWhatsAppDirectMessage = () => {
         const parts = [
-            `*Hola daniautoma, solicito un Diagnóstico / Presupuesto:*`,
+            `*Hola daniautoma, quiero agendar una llamada de valoración / diagnóstico:*`,
             formData.fullName ? `👤 *Nombre:* ${formData.fullName}` : "",
-            formData.businessType ? `🏢 *Negocio / Nicho:* ${formData.businessType}` : "",
+            formData.businessName ? `🏢 *Negocio:* ${formData.businessName}` : "",
             formData.serviceInterest ? `⚡ *Servicio de Interés:* ${formData.serviceInterest}` : "",
             formData.phone ? `📱 *Teléfono:* ${formData.phone}` : "",
             formData.email ? `✉️ *Email:* ${formData.email}` : "",
-            formData.message ? `📝 *Necesidad:* ${formData.message}` : "Me gustaría agendar una llamada de valoración sobre automatizaciones e IA.",
+            formData.message ? `📝 *Necesidad:* ${formData.message}` : "Hola daniautoma, vi su sitio web y quiero agendar una llamada de valoración para mi negocio.",
         ].filter(Boolean);
 
         return parts.join("\n");
@@ -115,7 +115,7 @@ export function LeadForm() {
                             Diagnóstico Gratuito
                         </div>
                         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3 text-white">
-                            Solicitar Diagnóstico / Presupuesto
+                            Solicitar Diagnóstico / Presupuesto Gratuito
                         </h2>
                         <p className="text-muted-foreground text-sm md:text-base max-w-xl mx-auto">
                             Cuéntanos sobre tu negocio y te mostraremos cómo automatizar tus procesos con IA y n8n para multiplicar tus conversiones.
@@ -128,9 +128,9 @@ export function LeadForm() {
                             <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center">
                                 <CheckCircle2 className="w-10 h-10" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white">¡Mensaje Recibido!</h3>
+                            <h3 className="text-2xl font-bold text-white">¡Solicitud Registrada!</h3>
                             <p className="text-emerald-300 max-w-md mx-auto text-base">
-                                ¡Gracias! Un especialista o nuestro asistente virtual te contactará en breve para coordinar tu diagnóstico.
+                                ¡Gracias! Tu solicitud ha sido registrada. Nuestro asistente o un especialista te contactará en breve.
                             </p>
                             <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3">
                                 <Button
@@ -145,17 +145,17 @@ export function LeadForm() {
                                     className="bg-emerald-600 hover:bg-emerald-500 text-white flex items-center gap-2"
                                 >
                                     <MessageSquare className="w-4 h-4" />
-                                    Continuar por WhatsApp
+                                    Continuar por WhatsApp directo
                                 </Button>
                             </div>
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit} className="space-y-6">
-                            {/* Fila 1: Nombre completo y Correo */}
+                            {/* Fila 1: Nombre Completo y Correo Electrónico */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label htmlFor="fullName" className="text-sm font-medium text-gray-200">
-                                        Nombre completo <span className="text-primary">*</span>
+                                        Nombre Completo <span className="text-primary">*</span>
                                     </label>
                                     <input
                                         id="fullName"
@@ -170,7 +170,7 @@ export function LeadForm() {
                                 </div>
                                 <div className="space-y-2">
                                     <label htmlFor="email" className="text-sm font-medium text-gray-200">
-                                        Correo electrónico <span className="text-primary">*</span>
+                                        Correo Electrónico <span className="text-primary">*</span>
                                     </label>
                                     <input
                                         id="email"
@@ -185,7 +185,7 @@ export function LeadForm() {
                                 </div>
                             </div>
 
-                            {/* Fila 2: Teléfono / WhatsApp y Tipo de Negocio */}
+                            {/* Fila 2: Teléfono / WhatsApp y Nombre del Negocio */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label htmlFor="phone" className="text-sm font-medium text-gray-200">
@@ -203,18 +203,18 @@ export function LeadForm() {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label htmlFor="businessType" className="text-sm font-medium text-gray-200">
-                                        Tipo de Negocio / Nicho <span className="text-primary">*</span>
+                                    <label htmlFor="businessName" className="text-sm font-medium text-gray-200">
+                                        Nombre del Negocio <span className="text-primary">*</span>
                                     </label>
                                     <input
-                                        id="businessType"
-                                        name="businessType"
+                                        id="businessName"
+                                        name="businessName"
                                         type="text"
                                         required
-                                        value={formData.businessType}
+                                        value={formData.businessName}
                                         onChange={handleChange}
                                         className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm"
-                                        placeholder="Ej: Clínica Dental, Inmobiliaria, Servicios"
+                                        placeholder="Ej: Clínica Dental Dra. Bianca"
                                     />
                                 </div>
                             </div>
@@ -239,10 +239,10 @@ export function LeadForm() {
                                 </select>
                             </div>
 
-                            {/* Mensaje / Necesidad principal */}
+                            {/* Mensaje / Necesidad */}
                             <div className="space-y-2">
                                 <label htmlFor="message" className="text-sm font-medium text-gray-200">
-                                    Mensaje / Necesidad principal <span className="text-primary">*</span>
+                                    Mensaje / Necesidad <span className="text-primary">*</span>
                                 </label>
                                 <textarea
                                     id="message"
@@ -252,7 +252,7 @@ export function LeadForm() {
                                     value={formData.message}
                                     onChange={handleChange}
                                     className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm resize-none"
-                                    placeholder="Describe brevemente qué proceso te gustaría automatizar o qué problema buscas resolver..."
+                                    placeholder="Cuéntanos brevemente sobre tu negocio, tus canales actuales y qué te gustaría automatizar..."
                                 />
                             </div>
 
@@ -276,17 +276,17 @@ export function LeadForm() {
                                     {status === "loading" ? (
                                         <span className="flex items-center justify-center gap-2">
                                             <Loader2 className="w-5 h-5 animate-spin" />
-                                            Enviando a n8n...
+                                            Enviando solicitud a n8n...
                                         </span>
                                     ) : (
                                         <span className="flex items-center justify-center gap-2">
                                             <Send className="w-5 h-5" />
-                                            Solicitar Diagnóstico / Presupuesto
+                                            Solicitar Diagnóstico / Presupuesto Gratuito
                                         </span>
                                     )}
                                 </Button>
 
-                                {/* Botón Secundario de Respaldo WhatsApp */}
+                                {/* Opción secundaria requerida */}
                                 <Button
                                     type="button"
                                     variant="outline"
@@ -295,7 +295,7 @@ export function LeadForm() {
                                     className="w-full text-sm py-5 border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 hover:text-emerald-200 transition-all flex items-center justify-center gap-2"
                                 >
                                     <MessageSquare className="w-4 h-4 text-emerald-400" />
-                                    Preferir enviar datos por WhatsApp directo
+                                    Preferir contactar por WhatsApp directo
                                 </Button>
                             </div>
 

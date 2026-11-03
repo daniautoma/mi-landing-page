@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, X } from "lucide-react";
+import { X } from "lucide-react";
 import { agenciaData, getWhatsAppLink } from "@/data/agencia";
 
 export function WhatsAppFloatingButton() {
@@ -12,7 +12,7 @@ export function WhatsAppFloatingButton() {
         <aside aria-label="Contacto por WhatsApp" className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
             {/* Tooltip / Globo de atención */}
             {showTooltip && (
-                <div className="hidden sm:flex items-center gap-2 bg-slate-900/95 border border-emerald-500/30 text-white px-4 py-2.5 rounded-2xl shadow-2xl backdrop-blur-md animate-bounce-subtle text-xs">
+                <div className="hidden sm:flex items-center gap-2 bg-slate-900/95 border border-emerald-500/30 text-white px-4 py-2.5 rounded-2xl shadow-2xl backdrop-blur-md text-xs">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                     <div>
                         <p className="font-semibold text-emerald-400">¿Hablamos por WhatsApp?</p>

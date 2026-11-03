@@ -16,21 +16,20 @@ export function Hero() {
                 {/* Badge Superior */}
                 <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs md:text-sm text-secondary font-medium tracking-wide">
                     <Sparkles className="w-4 h-4 text-secondary" />
-                    <span>Agencia de Automatización & Inteligencia Artificial</span>
+                    <span>daniautoma | Agencia de Automatización & IA</span>
                 </div>
 
                 {/* Título Principal */}
                 <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-8 glow-text leading-[1.1]">
-                    Transformamos tu negocio local con <br />
+                    Agentes de WhatsApp con IA & <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-300 to-blue-400">
-                        Agentes de WhatsApp con IA
+                        Automatización Inteligente
                     </span>
                 </h1>
 
-                {/* Propuesta de Valor */}
+                {/* Propuesta de Valor Principal */}
                 <p className="text-lg md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed text-balance">
-                    Sistemas de citas automáticas, atención al cliente 24/7 y flujos de trabajo inteligentes con{" "}
-                    <span className="text-white font-semibold">n8n</span> para multiplicar tus ventas sin contratar más personal.
+                    {agenciaData.propuestaValor}
                 </p>
 
                 {/* Llamadas a la acción (CTAs) */}
@@ -47,7 +46,7 @@ export function Hero() {
                             className="flex items-center justify-center gap-2"
                         >
                             <MessageSquare className="w-5 h-5" />
-                            Hablar con un Asesor
+                            Agendar Llamada de Valoración
                         </a>
                     </Button>
 
@@ -58,7 +57,7 @@ export function Hero() {
                         asChild
                     >
                         <Link href="#demos" className="flex items-center justify-center gap-2">
-                            <span>Probar Demos en Vivo</span>
+                            <span>Ver Demos en Vivo</span>
                             <ArrowRight className="w-4 h-4" />
                         </Link>
                     </Button>
@@ -68,15 +67,15 @@ export function Hero() {
                 <div className="flex flex-wrap items-center justify-center gap-6 text-xs md:text-sm text-gray-400">
                     <div className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                        <span>Respuesta en menos de 5 segundos</span>
+                        <span>Respuesta en segundos vía WhatsApp</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-                        <span>Sincronización con Google Calendar & CRM</span>
+                        <span>Sincronización con CRM & Calendario</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-purple-400" />
-                        <span>Implementación a medida con n8n</span>
+                        <span>Flujos de trabajo robustos con n8n</span>
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
         default: "daniautoma | Agencia de Automatización con IA & Agentes de WhatsApp",
         template: "%s | daniautoma",
     },
-    description: "Optimizamos la captación de clientes de tu negocio con agentes de IA en WhatsApp, formularios automatizados y desarrollo web ultra-rápido.",
+    description: "Transformamos la captación de clientes de tu negocio con agentes virtuales en WhatsApp, automatizaciones con n8n y desarrollo web de alta velocidad.",
     keywords: [
         "automatización de procesos",
         "agentes de whatsapp con ia",
@@ -23,6 +23,8 @@ export const metadata: Metadata = {
         "crm citas whatsapp",
         "inteligencia artificial para pymes",
         "daniautoma",
+        "landing pages astro",
+        "nextjs",
     ],
     authors: [{ name: "daniautoma", url: agenciaData.dominio }],
     creator: "daniautoma",
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
         locale: "es_ES",
         url: agenciaData.dominio,
         title: "daniautoma | Agencia de Automatización con IA & Agentes de WhatsApp",
-        description: "Optimizamos la captación de clientes de tu negocio con agentes de IA en WhatsApp, formularios automatizados y desarrollo web ultra-rápido.",
+        description: "Transformamos la captación de clientes de tu negocio con agentes virtuales en WhatsApp, automatizaciones con n8n y desarrollo web de alta velocidad.",
         siteName: agenciaData.nombreCompleto,
         images: [
             {
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "daniautoma | Agencia de Automatización con IA & Agentes de WhatsApp",
-        description: "Optimizamos la captación de clientes de tu negocio con agentes de IA en WhatsApp, formularios automatizados y desarrollo web ultra-rápido.",
+        description: "Transformamos la captación de clientes de tu negocio con agentes virtuales en WhatsApp, automatizaciones con n8n y desarrollo web de alta velocidad.",
         images: ["/logo-daniautoma.svg"],
     },
     icons: {

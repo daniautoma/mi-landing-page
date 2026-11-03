@@ -4,6 +4,7 @@ import { Instagram, Linkedin, MessageSquare, ExternalLink, Mail, Phone } from "l
 
 export function Footer() {
     const whatsappUrl = getWhatsAppLink(agenciaData.whatsapp.mensajePredeterminado);
+    const whatsappDemoUrl = getWhatsAppLink(agenciaData.whatsapp.mensajeDemoAgencia);
 
     return (
         <footer className="border-t border-white/10 bg-black/60 backdrop-blur-xl mt-20">
@@ -30,7 +31,7 @@ export function Footer() {
                                 className="flex items-center gap-2 hover:text-emerald-400 transition-colors"
                             >
                                 <Phone className="w-4 h-4 text-emerald-400" />
-                                <span>WhatsApp: {agenciaData.whatsapp.displayNumber}</span>
+                                <span>WhatsApp Corporativo: {agenciaData.whatsapp.displayNumber}</span>
                             </a>
                             <a
                                 href={`mailto:${agenciaData.social.email}`}
@@ -77,7 +78,7 @@ export function Footer() {
                             </li>
                             <li>
                                 <a
-                                    href={whatsappUrl}
+                                    href={whatsappDemoUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="hover:text-emerald-400 transition-colors flex items-center gap-1.5"
@@ -97,7 +98,7 @@ export function Footer() {
                         <ul className="space-y-2.5 text-sm text-muted-foreground">
                             <li>
                                 <Link href="#servicios" className="hover:text-white transition-colors">
-                                    Servicios de Automatización
+                                    Catálogo de Servicios
                                 </Link>
                             </li>
                             <li>

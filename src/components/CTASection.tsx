@@ -41,7 +41,7 @@ export function CTASection() {
                                 rel="noopener noreferrer"
                             >
                                 <MessageSquare className="w-5 h-5" />
-                                Hablar con un Asesor por WhatsApp
+                                Agendar Llamada de Valoración
                             </a>
                         </Button>
 

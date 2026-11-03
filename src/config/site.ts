@@ -23,6 +23,6 @@ export const siteConfig = {
         chat: agenciaData.webhooks.n8nChatWebhook,
     },
     analytics: {
-        gaId: process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX",
+        gaId: process.env.NEXT_PUBLIC_GA_ID || "",
     },
 };

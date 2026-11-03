@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { MessageSquare, ExternalLink, Sparkles, CheckCircle2, ShieldCheck, Zap, ArrowRight, Stethoscope } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { agenciaData, getWhatsAppLink } from "@/data/agencia";
@@ -29,7 +28,7 @@ export function LiveDemos() {
 
                 {/* Grid de Tarjetas de Demos */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                    {/* Tarjeta 1: Agente WhatsApp & CRM */}
+                    {/* Tarjeta Demo 1: Agente de WhatsApp & CRM Operativo */}
                     <div className="group relative rounded-3xl p-8 md:p-10 bg-slate-900/60 border border-white/10 hover:border-emerald-500/50 transition-all duration-300 shadow-xl flex flex-col justify-between overflow-hidden">
                         {/* Brillo dinámico en hover */}
                         <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 blur-[80px] rounded-full pointer-events-none group-hover:bg-emerald-500/20 transition-colors" />
@@ -52,14 +51,14 @@ export function LiveDemos() {
                                 </div>
                                 <div>
                                     <h3 className="text-2xl font-bold text-white group-hover:text-emerald-300 transition-colors">
-                                        Agente de WhatsApp & CRM de Citas
+                                        Agente de WhatsApp & CRM Operativo
                                     </h3>
                                     <p className="text-xs text-emerald-400 font-medium">Ecosistema daniautoma</p>
                                 </div>
                             </div>
 
                             <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6">
-                                Interactúa en tiempo real con nuestro agente inteligente de WhatsApp. Responde preguntas frecuentes, califica prospectos y gestiona agendamientos sincronizados automáticamente en nuestro CRM central.
+                                Interactúa en tiempo real con el asistente virtual de la agencia. Responde preguntas frecuentes, califica requerimientos y gestiona agendamientos sincronizados automáticamente en nuestro CRM central.
                             </p>
 
                             {/* Lista de características */}
@@ -74,7 +73,7 @@ export function LiveDemos() {
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                                    <span>Panel CRM conectado a base de datos para seguimiento de clientes</span>
+                                    <span>Panel CRM conectado a base de datos para seguimiento omnicanal</span>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +91,7 @@ export function LiveDemos() {
                                     className="flex items-center justify-center gap-2"
                                 >
                                     <MessageSquare className="w-5 h-5" />
-                                    Probar Agente en Vivo
+                                    Chatear con el Asistente en WhatsApp
                                 </a>
                             </Button>
                             <Button
@@ -113,7 +112,7 @@ export function LiveDemos() {
                         </div>
                     </div>
 
-                    {/* Tarjeta 2: Demo Dental Dra. Bianca */}
+                    {/* Tarjeta Demo 2: Sitio Web + Asistente Dental (Clínica Dra. Bianca) */}
                     <div className="group relative rounded-3xl p-8 md:p-10 bg-slate-900/60 border border-white/10 hover:border-cyan-500/50 transition-all duration-300 shadow-xl flex flex-col justify-between overflow-hidden">
                         {/* Brillo dinámico en hover */}
                         <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/10 blur-[80px] rounded-full pointer-events-none group-hover:bg-cyan-500/20 transition-colors" />
@@ -136,21 +135,21 @@ export function LiveDemos() {
                                 </div>
                                 <div>
                                     <h3 className="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
-                                        Sitio Web + Asistente Dental
+                                        Sitio Web + Asistente Dental (Clínica Dra. Bianca)
                                     </h3>
-                                    <p className="text-xs text-cyan-400 font-medium">Clínica Dra. Bianca</p>
+                                    <p className="text-xs text-cyan-400 font-medium">drabianca.daniautoma.cloud</p>
                                 </div>
                             </div>
 
                             <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6">
-                                Demostración interactiva en vivo diseñada para el sector odontológico y médico. Descubre la velocidad de carga instantánea de Astro, diseño moderno y su asistente integrado para pacientes.
+                                Demostración interactiva en vivo diseñada para el sector odontológico y médico. Comprueba la velocidad de carga de Astro y la experiencia de usuario con su asistente integrado para pacientes.
                             </p>
 
                             {/* Lista de características */}
                             <div className="space-y-2.5 mb-8 text-sm text-gray-300">
                                 <div className="flex items-center gap-2">
                                     <Zap className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                                    <span>Carga ultra-rápida (Score 100 en Google Lighthouse con Astro)</span>
+                                    <span>Carga ultra-rápida (Score 95+ en Google PageSpeed con Astro)</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <ShieldCheck className="w-4 h-4 text-cyan-400 flex-shrink-0" />
@@ -158,7 +157,7 @@ export function LiveDemos() {
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                                    <span>Diseño responsive con enfoque en conversión de pacientes</span>
+                                    <span>Diseño responsive con enfoque en alta conversión de pacientes</span>
                                 </div>
                             </div>
                         </div>
