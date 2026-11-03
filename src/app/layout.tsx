@@ -64,8 +64,8 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="es" className="scroll-smooth">
-            <head>
-                {siteConfig.analytics.gaId && (
+            <body className={`${inter.className} bg-background text-foreground antialiased selection:bg-emerald-500/30 selection:text-white`}>
+                {Boolean(siteConfig.analytics.gaId) && (
                     <>
                         <Script
                             src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.analytics.gaId}`}
@@ -81,8 +81,6 @@ export default function RootLayout({
                         </Script>
                     </>
                 )}
-            </head>
-            <body className={`${inter.className} bg-background text-foreground antialiased selection:bg-emerald-500/30 selection:text-white`}>
                 {children}
             </body>
         </html>

@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         background: "#050816", // Deep Navy
+        foreground: "#f8fafc",
         primary: {
           DEFAULT: "#3B82F6", // Electric Blue
           foreground: "#ffffff",
@@ -22,7 +23,17 @@ const config: Config = {
           DEFAULT: "#0F172A", // Dark Slate for cards
           foreground: "#E2E8F0",
         },
-        muted: "#64748B",
+        muted: {
+          DEFAULT: "#64748B",
+          foreground: "#94a3b8",
+        },
+        border: "rgba(255, 255, 255, 0.1)",
+        input: "rgba(255, 255, 255, 0.1)",
+        ring: "#3B82F6",
+        card: {
+          DEFAULT: "rgba(15, 23, 42, 0.6)",
+          foreground: "#f8fafc",
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
