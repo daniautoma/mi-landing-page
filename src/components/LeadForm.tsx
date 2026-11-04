@@ -28,7 +28,11 @@ export function LeadForm() {
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [errorMessage, setErrorMessage] = useState("");
 
-    const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || agenciaData.webhooks.n8nLeadWebhook;
+    // Obtener la URL asegurando que use el subdominio n8n.
+    let webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || agenciaData.webhooks.n8nLeadWebhook;
+    if (webhookUrl.includes("daniautoma.cloud/webhook") && !webhookUrl.includes("n8n.daniautoma.cloud")) {
+        webhookUrl = webhookUrl.replace("https://daniautoma.cloud/webhook", "https://n8n.daniautoma.cloud/webhook");
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -36,8 +40,19 @@ export function LeadForm() {
         setErrorMessage("");
 
         try {
+            // Se envían los campos con las dos nomenclaturas para compatibilidad total con n8n:
+            // n8n espera: name, email, company, description
             const payload = {
-                ...formData,
+                name: formData.fullName,
+                fullName: formData.fullName,
+                email: formData.email,
+                company: formData.businessName,
+                businessName: formData.businessName,
+                description: formData.message,
+                message: formData.message,
+                phone: formData.phone,
+                service: formData.serviceInterest,
+                serviceInterest: formData.serviceInterest,
                 source: "landing_page_daniautoma",
                 originDomain: typeof window !== "undefined" ? window.location.origin : "https://daniautoma.cloud",
                 submittedAt: new Date().toISOString(),
